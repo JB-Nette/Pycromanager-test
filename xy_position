@@ -1,1 +1,82 @@
+import numpy as np
+
+
+xstart = 0
+ystart = 0
+zstart = 0
+xend = 5
+yend = 3
+zend = 6
+xstep = 0.5
+ystep = 0.5
+zstep = 2
+
+xpos = np.arange(xstart,xend, xstep)
+ypos = np.arange(ystart,yend,ystep)
+zpos = np.arange(zstart,zend,zstep)
+
+
+for y in ypos:
+
+    for znum, z in enumerate(zpos):
+
+        if znum%2 ==0:
+           for x in xpos:
+              xy = np.hstack([x,y])
+              #multi_d_acquisition_events(xy_position = xyre, z_position = z)
+              print('z', z)
+              print('xy',xy)
+
+
+        if znum%2 ==1:
+            for x in reversed(xpos):
+
+               xyre = np.hstack([x,y])
+               #multi_d_acquisition_events(xy_position = xyre, z_position = z)
+               print('zre', z)
+               print('re',xyre)
+
+    xend = x
+    print('xend',xend)
+
+    if xend == xpos[-1]:
+       xpos = xpos[::-1]
+       print("New X", xpos)
+
+    else:
+       pass
+
+#Section2
+
+for y in ypos:
+    for znum, z in enumerate(zpos):
+
+        if znum%2 ==0:
+           ylist = np.array([y]*len(xpos))
+           xy = np.hstack([xpos[:,None],ylist[:,None]])
+           #multi_d_acquisition_events(xy_position = xyre, z_position = z)
+           print('z', z)
+           print('xy',xy)
+
+
+        if znum%2 ==1:
+            xpos_re = xpos[::-1]
+            ylist = np.array([y]*len(xpos_re))
+            xy = np.hstack([xpos_re[:,None],ylist[:,None]])
+            #multi_d_acquisition_events(xy_position = xy, z_position = z)
+            print('zre', z)
+            print('re',xy)
+
+    xend = xy[-1,0]
+    print('xend',xend)
+
+    if xend == xpos[-1]:
+       xpos = xpos[::-1]
+       print("New X", xpos)
+
+    else:
+       pass
+
+
+#Endsection2
 

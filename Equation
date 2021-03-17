@@ -1,0 +1,89 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+#Model 1
+#X = [exp time] then Y = total time, this is for 1 channels and 80 time points
+
+X = np.array([200, 150, 100,50]).reshape((-1,1))
+print(X)
+
+y = np.array([21, 17, 13, 9])
+print(y)
+
+model = LinearRegression().fit(X, y)
+
+print('slope', model.coef_)
+
+print('intercept', model.intercept_)
+
+print('predict', model.predict(np.array([25]).reshape((-1,1))))
+
+#Model2
+#X2 = [exp time, no.of time points] then Y2 = total time, this is for 1 channels
+
+X2 = np.array([[200,80], [150,80], [100,80], [50,80], [100,40], [50,40], [25,40]]).reshape((-1,2))
+print(X2)
+
+y2 = np.array([21, 17, 13, 9, 7, 5, 4])
+print(y2)
+
+model2 = LinearRegression().fit(X2, y2)
+
+print('slope', model2.coef_)
+
+print('intercept', model2.intercept_)
+
+print('predict', model2.predict(np.array([25,100]).reshape((-1,2))))
+
+x_pred = np.array([250, 80]).reshape((-1,2))
+
+y_pred2 = model2.intercept_ + np.sum(model2.coef_ * x_pred, axis=1)
+
+print('y_pred2', y_pred2)
+
+#Model3
+#X3 = [exp time, total time] then Y3 = time point, this is for 1 channels
+
+X3 = np.array([[200,21], [150,17], [100,13], [50,9], [100,7], [50,5], [25,4]]).reshape((-1,2))
+print(X3)
+
+y3 = np.array([80, 80, 80, 80, 40, 40, 40])
+print(y3)
+
+model3 = LinearRegression().fit(X3, y3)
+
+print('slope', model3.coef_)
+
+print('intercept', model3.intercept_)
+
+print('predict', model3.predict(np.array([25,100]).reshape((-1,2))))
+
+x_pred3 = np.array([250, 24]).reshape((-1,2))
+
+y_pred3 = model3.intercept_ + np.sum(model3.coef_ * x_pred3, axis=1)
+
+print('y_pred3', y_pred3)
+
+
+#Model4
+#X4 = [exp time1, exp time2, total time] then Y4 = time point, this is for 2 channels
+
+X4 = np.array([[100,50, 28], [100,50, 1.21], [50,50,1.09], [50,50,0.889], [50,50,22.53], [100,50,0.89], [50,100,0.89]]).reshape((-1,3))
+print(X4)
+
+y4 = np.array([80,2,2,1,80,1,1])
+print(y4)
+
+model4 = LinearRegression().fit(X4, y4)
+
+print('slope', model4.coef_)
+
+print('intercept', model4.intercept_)
+
+print('predict', model4.predict(np.array([200,100,60]).reshape((-1,3))))
+
+x_pred4 = np.array([250, 100, 24]).reshape((-1,3))
+
+y_pred4 = model4.intercept_ + np.sum(model4.coef_ * x_pred4, axis=1)
+
+print('y_pred4', y_pred4)

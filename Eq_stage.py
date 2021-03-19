@@ -34,3 +34,18 @@ print('slope', model2.coef_)
 
 print('intercept', model2.intercept_)
 
+#Model 3 for True and Measure Velo for velocity at 0.01 to 0.1
+#X3 thue velo (that we input) then y = measure velo
+
+x3 = np.array([0.008,0.01,0.025,0.05,0.075,0.1]).reshape((-1,1))
+y3 = np.array([0.0076,0.0076,0.019,0.036,0.057,0.1])
+print(y3)
+
+model3 = LinearRegression().fit(x3, y3)
+
+print('slope', model3.coef_)
+print('intercept', model3.intercept_)
+
+x_pred = 0.03
+y_pred = model3.coef_*(x_pred)+model3.intercept_
+print(y_pred)
